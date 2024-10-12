@@ -1,2 +1,2 @@
 # Proyecto_POO
- Rpositorio para el proyecto del curso programación orientada a objetos para el grupo #(TBD).
+ Rpositorio para el proyecto del curso programación orientada a objetos para el grupo #8.
