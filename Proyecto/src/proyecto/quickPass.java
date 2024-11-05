@@ -9,5 +9,8 @@ package proyecto;
  * @author Nicole
  */
 public class quickPass {
-    
+    private int filial;
+    private int codigo;
+    private int placa;
+    public Estado estado;
 }
