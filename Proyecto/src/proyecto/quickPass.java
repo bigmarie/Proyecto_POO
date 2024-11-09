@@ -24,6 +24,7 @@ public class quickPass {
      this.placa = placa; 
      this.estado = estado; 
     }
+    // Prueba
     
     public int getFilial(){
         return filial; 
