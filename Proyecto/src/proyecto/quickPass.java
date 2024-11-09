@@ -8,24 +8,24 @@ package proyecto;
  *
  * @author Nicole
  */
-public class quickPass {
+public class QuickPass {
     
     
     //Atributos de la clase quickpass
-    private int filial;
+    private String filial;
     private int codigo;
-    private int placa;
+    private String  placa;
     public Estado estado;
     
    //Constructor
-    public quickPass(int filial, int codigo, int placa, Estado estado){
+    public QuickPass(String filial, int codigo, String placa, Estado estado){
      this.filial = filial; 
      this.codigo = codigo;
      this.placa = placa; 
      this.estado = estado; 
     }
     
-    public int getFilial(){
+    public String getFilial(){
         return filial; 
     }
     
@@ -33,7 +33,7 @@ public class quickPass {
         return codigo; 
     }
     
-    public int getPlaca(){
+    public String getPlaca(){
         return placa; 
     }
     
@@ -41,7 +41,7 @@ public class quickPass {
         return estado; 
     }
     
-    public void setFilial(int filial){
+    public void setFilial(String filial){
         this.filial = filial;
     }
     
@@ -50,7 +50,7 @@ public class quickPass {
         
     }
     
-    public void setPlaca(int placa){
+    public void setPlaca(String placa){
         this.placa = placa;
     }
     

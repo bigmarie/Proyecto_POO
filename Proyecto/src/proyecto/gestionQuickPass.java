@@ -4,10 +4,19 @@
  */
 package proyecto;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Nicole
  */
-public class gestionQuickPass {
+public class GestionQuickPass {
+    private QuickPass arregloQuickPass[];
+    
+    public void agregarQuickPass(){
+        
+        
+    }
+    
     
 }
