@@ -14,11 +14,11 @@ public class QuickPass {
     //Atributos de la clase quickpass
     private String filial;
     private int codigo;
-    private String  placa;
+    private int  placa;
     public Estado estado;
     
    //Constructor
-    public QuickPass(String filial, int codigo, String placa, Estado estado){
+    public QuickPass(String filial, int codigo, int placa, Estado estado){
      this.filial = filial; 
      this.codigo = codigo;
      this.placa = placa; 
@@ -33,7 +33,7 @@ public class QuickPass {
         return codigo; 
     }
     
-    public String getPlaca(){
+    public int getPlaca(){
         return placa; 
     }
     
@@ -50,7 +50,7 @@ public class QuickPass {
         
     }
     
-    public void setPlaca(String placa){
+    public void setPlaca(int placa){
         this.placa = placa;
     }
     
