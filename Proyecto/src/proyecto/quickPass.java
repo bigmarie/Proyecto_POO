@@ -13,7 +13,7 @@ public class QuickPass {
     
     //Atributos de la clase quickpass
     private String filial;
-    private int codigo;
+    public int codigo;
     private int  placa;
     public Estado estado;
     
