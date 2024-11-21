@@ -17,8 +17,8 @@ public class Proyecto {
         // TODO code application logic here
         
         GestionQuickPass gestionQuickPass = new GestionQuickPass();
-        
-        gestionQuickPass.eliminarQuickPass();
+        gestionQuickPass.agregarQuickPass();
+        gestionQuickPass.visualizar();
     }
     
 }
