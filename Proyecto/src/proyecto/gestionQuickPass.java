@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  *
  * @author Nicole
  */
-public class GestionQuickPass {
+public class GestionQuickPass{
     private QuickPass arregloQuickPass[] = new QuickPass[150];
     private QuickPass quickPassEliminados[] = new QuickPass[150];
     
@@ -381,5 +381,32 @@ public class GestionQuickPass {
             }
         }
     }
-    // Fin
+
+    public QuickPass getArregloQuickPassperCodigo(){
+        String inputCodigo = "";
+        boolean esValido = false;
+        int codigo = 0;
+        
+        while(!esValido){
+            inputCodigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+            
+            if(!esCodigo(inputCodigo)){
+                System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+            }else{
+               codigo = Integer.parseInt(inputCodigo);
+               
+               for(int i = 0; i < arregloQuickPass.length; i++){
+                   if(arregloQuickPass[i]!=null){
+                       if(arregloQuickPass[i].codigo == codigo){
+                           return arregloQuickPass[i];
+                       }
+                   }
+               }
+               esValido = true;
+           }
+        }
+        return null;
+    }
+
+// Fin
 }
