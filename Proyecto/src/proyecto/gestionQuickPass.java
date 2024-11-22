@@ -26,7 +26,7 @@ public class GestionQuickPass {
         agregarArregloQuickPass(filial, codigo, placa, estado);
     }
     
-        public void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
+    public void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i] == null){
                 QuickPass nuevoQuickPass = new QuickPass(filial, codigo, placa, estado);
@@ -182,16 +182,37 @@ public class GestionQuickPass {
     public void eliminarQuickPass(){
         boolean esValido = false;
         String opcion = "";
+        String codigo = "";
+        String filial = "";
         
         while(!esValido){
             opcion = JOptionPane.showInputDialog(null, "ELIMINAR \n 1. Por codigo \n 2. Por placa \n Ingrese el número de la opción a escoger: ");
             
             switch(opcion){
                 case "1":
-                    System.out.println("Por codigo");
+                    while(!esValido){
+                        codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                        if(!esCodigo(codigo)){
+                            System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                        }else{
+                            int codigoInt = Integer.parseInt(codigo);
+                            eliminarQuickPassporCodigo(codigoInt);
+                            esValido = true;
+                            System.out.println("Codigo eliminado");
+                        }
+                    }
                     break;
                 case "2":
-                    System.out.println("Por placa");
+                    while(!esValido){
+                        filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                        if(!esFilial(filial)){
+                            System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                        }else{
+                            eliminarQuickPassporFilial(filial);
+                            esValido = true;
+                            System.out.println("Filial eliminado");
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Opcion no valida");
@@ -209,6 +230,113 @@ public class GestionQuickPass {
                 }
             }
         }
+    }
+    
+    public void eliminarQuickPassporFilial(String filial){
+        for(int i = 0; i < arregloQuickPass.length; i++){
+            if(arregloQuickPass[i]!=null){
+                if(arregloQuickPass[i].getFilial().equals(filial)){
+                    agregarArregloEliminado(arregloQuickPass[i]);
+                    arregloQuickPass[i] = null;
+                }
+            }
+        }
+    }
+    
+    // VISUALIZAR
+    public void visualizar(){
+        boolean esValido = false;
+        String opcion = "";
+        String opcion2 = "";
+        String codigo = "";
+        
+        String menu = "VISUALIZAR \n 1. Todos los QuickPass \n 2. Por codigo \n 3. Por filial \n Ingrese el número de la opción a escoger: ";
+        
+        while(!esValido){
+            opcion = JOptionPane.showInputDialog(null, "VISUALIZAR \n 1. QuickPass Agregados \n 2. QuickPass Eliminados \n Ingrese el número de la opción a escoger: ");
+            
+            switch(opcion){
+                case "1":
+                    while(!esValido){
+                        opcion2 = JOptionPane.showInputDialog(null, menu);
+                        switch(opcion2){
+                            case "1":
+                                visualizarTodos(arregloQuickPass);
+                                esValido = true;
+                                break;
+                            case "2":
+                                while(!esValido){
+                                    codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                                    if(!esCodigo(codigo)){
+                                        System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                                    }else{
+                                        int codigoInt = Integer.parseInt(codigo);
+                                        eliminarQuickPassporCodigo(codigoInt);
+                                        esValido = true;
+                                        System.out.println("Codigo eliminado");
+                                    }
+                                }
+                                visualizarPorCodigo(arregloQuickPass);
+                                esValido = true;
+                                break;
+                            case "3":
+                                visualizarPorFilial(arregloQuickPass);
+                                esValido = true;
+                                break;
+                            default:
+                                System.out.println("Opcion no valida");
+                                break;
+                        }
+                    }
+                break;
+                case "2":
+                    while(!esValido){
+                        opcion2 = JOptionPane.showInputDialog(null, menu);
+                        switch(opcion2){
+                            case "1":
+                                visualizarTodos(quickPassEliminados);
+                                esValido = true;
+                                break;
+                            case "2":
+                                visualizarPorCodigo(quickPassEliminados);
+                                esValido = true;
+                                break;
+                            case "3":
+                                visualizarPorFilial(quickPassEliminados);
+                                esValido = true;
+                                break;
+                            default:
+                                System.out.println("Opcion no valida");
+                                break;
+                        }
+                    }
+                break;
+                default:
+                    System.out.println("Opcion no valida");
+                break;
+            }
+        }
+    }
+    
+    public void visualizarTodos(QuickPass arreglo[]){
+        for(int i = 0; i < arreglo.length;i++){
+            if(arreglo[i]!=null){
+                String r = "Gestion QuickPass";
+                r += "\n" + i + ". Codigo: " + arreglo[i].getCodigo() +
+                        " Filial: " + arreglo[i].getFilial() +
+                        " Placa: " + arreglo[i].getPlaca() + 
+                        " Estado: " + arreglo[i].getEstado();
+                System.out.println(r);
+            }
+         }
+    }
+    
+    public void visualizarPorCodigo(QuickPass arreglo[]){
+        
+    }
+    
+    public void visualizarPorFilial(QuickPass arreglo[]){
+        
     }
     // Fin
 }
