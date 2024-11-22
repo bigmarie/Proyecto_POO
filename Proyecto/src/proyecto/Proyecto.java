@@ -18,6 +18,7 @@ public class Proyecto {
         
         GestionQuickPass gestionQuickPass = new GestionQuickPass();
         gestionQuickPass.agregarQuickPass();
+        gestionQuickPass.eliminarQuickPass();
         gestionQuickPass.visualizar();
     }
     

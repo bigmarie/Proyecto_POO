@@ -100,13 +100,14 @@ public class GestionQuickPass {
     }
     
     public void agregarArregloEliminado(QuickPass quickPassEliminado){
-        for(int i = 0; i < arregloQuickPass.length;i++){
-            if(arregloQuickPass[i]==null){
-                arregloQuickPass[i] = quickPassEliminado;
+        for(int i = 0; i < quickPassEliminados.length;i++){
+            if(quickPassEliminados[i]==null){
+                quickPassEliminados[i] = quickPassEliminado;
                 return;
             }
         }
     }
+    
     // VALIDACIONES
     // Validacion Codigo
     public boolean esCodigo(String codigo){
@@ -249,6 +250,7 @@ public class GestionQuickPass {
         String opcion = "";
         String opcion2 = "";
         String codigo = "";
+        String filial = "";
         
         String menu = "VISUALIZAR \n 1. Todos los QuickPass \n 2. Por codigo \n 3. Por filial \n Ingrese el número de la opción a escoger: ";
         
@@ -271,17 +273,21 @@ public class GestionQuickPass {
                                         System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                                     }else{
                                         int codigoInt = Integer.parseInt(codigo);
-                                        eliminarQuickPassporCodigo(codigoInt);
+                                        visualizarPorCodigo(codigoInt, arregloQuickPass);
                                         esValido = true;
-                                        System.out.println("Codigo eliminado");
                                     }
                                 }
-                                visualizarPorCodigo(arregloQuickPass);
-                                esValido = true;
                                 break;
                             case "3":
-                                visualizarPorFilial(arregloQuickPass);
-                                esValido = true;
+                                while(!esValido){
+                                    filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                                    if(!esFilial(filial)){
+                                        System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                                    }else{
+                                        visualizarPorFilial(filial, arregloQuickPass);
+                                        esValido = true;
+                                    }
+                                }
                                 break;
                             default:
                                 System.out.println("Opcion no valida");
@@ -290,7 +296,7 @@ public class GestionQuickPass {
                     }
                 break;
                 case "2":
-                    while(!esValido){
+                   while(!esValido){
                         opcion2 = JOptionPane.showInputDialog(null, menu);
                         switch(opcion2){
                             case "1":
@@ -298,12 +304,27 @@ public class GestionQuickPass {
                                 esValido = true;
                                 break;
                             case "2":
-                                visualizarPorCodigo(quickPassEliminados);
-                                esValido = true;
+                                while(!esValido){
+                                    codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                                    if(!esCodigo(codigo)){
+                                        System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                                    }else{
+                                        int codigoInt = Integer.parseInt(codigo);
+                                        visualizarPorCodigo(codigoInt, quickPassEliminados);
+                                        esValido = true;
+                                    }
+                                }
                                 break;
                             case "3":
-                                visualizarPorFilial(quickPassEliminados);
-                                esValido = true;
+                                while(!esValido){
+                                    filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                                    if(!esFilial(filial)){
+                                        System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                                    }else{
+                                        visualizarPorFilial(filial, quickPassEliminados);
+                                        esValido = true;
+                                    }
+                                }
                                 break;
                             default:
                                 System.out.println("Opcion no valida");
@@ -321,22 +342,44 @@ public class GestionQuickPass {
     public void visualizarTodos(QuickPass arreglo[]){
         for(int i = 0; i < arreglo.length;i++){
             if(arreglo[i]!=null){
-                String r = "Gestion QuickPass";
+                String r = "";
                 r += "\n" + i + ". Codigo: " + arreglo[i].getCodigo() +
                         " Filial: " + arreglo[i].getFilial() +
                         " Placa: " + arreglo[i].getPlaca() + 
                         " Estado: " + arreglo[i].getEstado();
                 System.out.println(r);
             }
-         }
+        }
     }
     
-    public void visualizarPorCodigo(QuickPass arreglo[]){
-        
+    public void visualizarPorCodigo(int codigo, QuickPass arreglo[]){
+        for(int i = 0; i < arreglo.length;i++){
+            if(arreglo[i]!=null){
+                if(arreglo[i].getCodigo()==codigo){
+                    String r = "";
+                    r += "\n" + i + ". Codigo: " + arreglo[i].getCodigo() +
+                            " Filial: " + arreglo[i].getFilial() +
+                            " Placa: " + arreglo[i].getPlaca() + 
+                            " Estado: " + arreglo[i].getEstado();
+                    System.out.println(r);
+                }
+            }
+        }
     }
     
-    public void visualizarPorFilial(QuickPass arreglo[]){
-        
+    public void visualizarPorFilial(String filial, QuickPass arreglo[]){
+        for(int i = 0; i < arreglo.length;i++){
+            if(arreglo[i]!=null){
+                if(arreglo[i].getFilial().equals(filial)){
+                    String r = "";
+                    r += "\n" + i + ". Codigo: " + arreglo[i].getCodigo() +
+                            " Filial: " + arreglo[i].getFilial() +
+                            " Placa: " + arreglo[i].getPlaca() + 
+                            " Estado: " + arreglo[i].getEstado();
+                    System.out.println(r);
+                }
+            }
+        }
     }
     // Fin
 }
