@@ -1,0 +1,4 @@
+Codigo: 1011234567, Placa: 123123, Filial: A01, Condicion: Aceptado, Fecha: 15/05/2024 14:40
+Codigo: 1010000001, Placa: 123456, Filial: A02, Condicion: Aceptado, Fecha: 15/05/2024 14:40
+Codigo: 1010000002, Placa: 111111, Filial: A03, Condicion: ACEPTADO, Fecha: 21/11/2024 12:45
+Codigo: 1010000003, Placa: 111112, Filial: A04, Condicion: ACEPTADO, Fecha: 21/11/2024 12:40
