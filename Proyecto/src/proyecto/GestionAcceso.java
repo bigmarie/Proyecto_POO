@@ -14,11 +14,12 @@ import java.text.SimpleDateFormat;
 public class GestionAcceso {
     private Accesos arregloAccesos[] = new Accesos[400];
     
-    public void ingresoQuickPass(QuickPass arreglo){
+    public void ingresoQuickPass(){
         Date fechaActual = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         
-        String fecha = formato.format(fechaActual);   
+        String fecha = formato.format(fechaActual);
+        System.out.println(fecha);
     }
     // Fin
 }

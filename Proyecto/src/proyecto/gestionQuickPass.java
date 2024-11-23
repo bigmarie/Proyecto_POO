@@ -26,7 +26,7 @@ public class GestionQuickPass{
         agregarArregloQuickPass(filial, codigo, placa, estado);
     }
     
-    public void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
+    private void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i] == null){
                 QuickPass nuevoQuickPass = new QuickPass(filial, codigo, placa, estado);
@@ -38,7 +38,7 @@ public class GestionQuickPass{
     }
 
     // Agregar Filial Quickpass
-    public String agregarFilial(){
+    private String agregarFilial(){
         boolean esValido = false;
         String filial = "";
         
@@ -56,7 +56,7 @@ public class GestionQuickPass{
     }
     
     // Agregar Codigo quickpass
-    public int agregarCodigo(){
+    private int agregarCodigo(){
         boolean esValido = false;
         String inputCodigo;
         int codigo = 0;
@@ -81,7 +81,7 @@ public class GestionQuickPass{
     }
     
     // Agregar placa quickpass
-    public int agregarPlaca(){
+    private int agregarPlaca(){
         boolean esValido = false;
         String inputPlaca = "";
         int placa = 0;
@@ -99,7 +99,7 @@ public class GestionQuickPass{
         return placa;
     }
     
-    public void agregarArregloEliminado(QuickPass quickPassEliminado){
+    private void agregarArregloEliminado(QuickPass quickPassEliminado){
         for(int i = 0; i < quickPassEliminados.length;i++){
             if(quickPassEliminados[i]==null){
                 quickPassEliminados[i] = quickPassEliminado;
@@ -110,7 +110,7 @@ public class GestionQuickPass{
     
     // VALIDACIONES
     // Validacion Codigo
-    public boolean esCodigo(String codigo){
+    private boolean esCodigo(String codigo){
         if(codigo.length() < 10){
             return false;
         }
@@ -130,7 +130,7 @@ public class GestionQuickPass{
     }
     
     // Validacion Placa
-    public boolean esPlaca(String placa){
+    private boolean esPlaca(String placa){
         if(placa.length() != 6){
             return false;
         }
@@ -146,7 +146,7 @@ public class GestionQuickPass{
     }
     
     // Validacion Filial
-    public boolean esFilial(String string){
+    private boolean esFilial(String string){
         
         if(string.length() != 3){
             return false;
@@ -168,7 +168,7 @@ public class GestionQuickPass{
     }
     
     // Validar si existe quickpass
-    public boolean existeQuickPass(int codigo){
+    private boolean existeQuickPass(int codigo){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i] != null){
                 if(arregloQuickPass[i].codigo == codigo){
@@ -222,7 +222,7 @@ public class GestionQuickPass{
         }
     }
     
-    public void eliminarQuickPassporCodigo(int codigo){
+    private void eliminarQuickPassporCodigo(int codigo){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i]!=null){
                 if(arregloQuickPass[i].codigo == codigo){
@@ -233,7 +233,7 @@ public class GestionQuickPass{
         }
     }
     
-    public void eliminarQuickPassporFilial(String filial){
+    private void eliminarQuickPassporFilial(String filial){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i]!=null){
                 if(arregloQuickPass[i].getFilial().equals(filial)){
@@ -339,7 +339,7 @@ public class GestionQuickPass{
         }
     }
     
-    public void visualizarTodos(QuickPass arreglo[]){
+    private void visualizarTodos(QuickPass arreglo[]){
         for(int i = 0; i < arreglo.length;i++){
             if(arreglo[i]!=null){
                 String r = "";
@@ -352,7 +352,7 @@ public class GestionQuickPass{
         }
     }
     
-    public void visualizarPorCodigo(int codigo, QuickPass arreglo[]){
+    private void visualizarPorCodigo(int codigo, QuickPass arreglo[]){
         for(int i = 0; i < arreglo.length;i++){
             if(arreglo[i]!=null){
                 if(arreglo[i].getCodigo()==codigo){
@@ -367,7 +367,7 @@ public class GestionQuickPass{
         }
     }
     
-    public void visualizarPorFilial(String filial, QuickPass arreglo[]){
+    private void visualizarPorFilial(String filial, QuickPass arreglo[]){
         for(int i = 0; i < arreglo.length;i++){
             if(arreglo[i]!=null){
                 if(arreglo[i].getFilial().equals(filial)){
@@ -382,6 +382,7 @@ public class GestionQuickPass{
         }
     }
 
+    // en progreso
     public QuickPass getArregloQuickPassperCodigo(){
         String inputCodigo = "";
         boolean esValido = false;
