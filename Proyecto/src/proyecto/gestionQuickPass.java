@@ -26,7 +26,7 @@ public class GestionQuickPass{
         agregarArregloQuickPass(filial, codigo, placa, estado);
     }
     
-    private void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
+    public void agregarArregloQuickPass(String filial, int codigo, int placa, Estado estado){
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i] == null){
                 QuickPass nuevoQuickPass = new QuickPass(filial, codigo, placa, estado);
@@ -399,11 +399,14 @@ public class GestionQuickPass{
                for(int i = 0; i < arregloQuickPass.length; i++){
                    if(arregloQuickPass[i]!=null){
                        if(arregloQuickPass[i].codigo == codigo){
+                           esValido = true;
                            return arregloQuickPass[i];
                        }
                    }
                }
                esValido = true;
+               return null;
+               
            }
         }
         return null;
