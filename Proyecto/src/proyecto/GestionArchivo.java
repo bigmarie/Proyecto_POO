@@ -86,19 +86,18 @@ public class GestionArchivo {
         return contador;
     }
     
-    public void escribirArchivoHistorial(Accesos[] arreglo){
+    public void escribirArchivoHistorial(Accesos acceso){
         String nombre = "Historial.txt";
         
         try {
          FileWriter archivo = new FileWriter(nombre,true);
-         for(Accesos acceso : arreglo){
              String linea = "\n" + "Codigo: " + acceso.getCodigo() +
                      ", Placa: " + acceso.getPlaca() +
                      ", Filial: " + acceso.getFilial() +
                      ", Condicion: " + acceso.getCondicion() +
                      ", Fecha: " + acceso.getFecha();
              archivo.write(linea);
-         }
+         
          archivo.close();
          System.out.println("Se ha escrito correctamente");
        } catch (IOException e) {
