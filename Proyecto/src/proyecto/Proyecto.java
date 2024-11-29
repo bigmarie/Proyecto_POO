@@ -18,6 +18,8 @@ public class Proyecto {
     public static void main(String[] args) {
         // TODO code application logic here
         GestionQuickPass gestionQuickPass = new GestionQuickPass();
+        GestionAcceso gestionAcceso = new GestionAcceso();
+        
         boolean continuar = true;
 
         while (continuar) {
@@ -41,7 +43,7 @@ public class Proyecto {
                     menuGestionQuickPass(gestionQuickPass);
                     break;
                 case "2":
-                    menuGestionAccesos();
+                    menuGestionAccesos(gestionAcceso, gestionQuickPass);
                     break;
                 case "3":
                     menuReportes(gestionQuickPass);
@@ -100,7 +102,7 @@ public class Proyecto {
         }
     }
 
-    private static void menuGestionAccesos() {
+    private static void menuGestionAccesos(GestionAcceso gestionAcceso, GestionQuickPass gestionQuickPass) {
         boolean continuar = true;
 
         while (continuar) {
@@ -124,7 +126,10 @@ public class Proyecto {
 
             switch (opcion) {
                 case "1":
-                    JOptionPane.showMessageDialog(null, "Función Agregar Acceso aún no implementada.");
+                    String sms = "";
+                    QuickPass quickPass = gestionQuickPass.getArregloQuickPassperCodigo();
+                    sms = gestionAcceso.consulta(quickPass);
+                    System.out.println(sms);
                     break;
                 case "2":
                     JOptionPane.showMessageDialog(null, "Función Visualizar Acceso aún no implementada.");

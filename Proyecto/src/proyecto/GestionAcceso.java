@@ -30,6 +30,8 @@ public class GestionAcceso {
                 Accesos acceso = new Accesos("",0,0,Condicion.RECHAZADO,fecha);
                 arregloAccesos[i] = acceso;
                 System.out.println("Codigo no existe en la lista");
+                Accesos arregloAcceso = arregloAccesos[i];
+                setAcceso(arregloAcceso);
                 return "RECHAZADO";
                 }
             }
@@ -46,6 +48,8 @@ public class GestionAcceso {
                 Accesos acceso = new Accesos(filial,codigo,placa,Condicion.RECHAZADO,fecha);
                 arregloAccesos[i] = acceso;
                 System.out.println("QuickPass inactivo");
+                Accesos arregloAcceso = arregloAccesos[i];
+                setAcceso(arregloAcceso);
                 return "RECHAZADO";
                 }
             }  
@@ -55,6 +59,8 @@ public class GestionAcceso {
             if(arregloAccesos[i] == null){
                 Accesos acceso = new Accesos(filial,codigo,placa,Condicion.ACEPTADO,fecha);
                 arregloAccesos[i] = acceso;
+                Accesos arregloAcceso = arregloAccesos[i];
+                setAcceso(arregloAcceso);
                 return "ACEPTADO";
                 }
             }
@@ -63,26 +69,12 @@ public class GestionAcceso {
     
     private void getAllAccesos(){
         Accesos datos[] = archivo.leerArchivoHistorial();
-        String linea = "";
-        
         for(int i = 0; i < datos.length; i++){
             arregloAccesos[i] = datos[i];
         }
-        
-        for(int i = 0; i < arregloAccesos.length; i++){
-            if(arregloAccesos[i]!=null){
-                linea += "\n" + "Codigo: " + arregloAccesos[i].getCodigo() +
-                     ", Placa: " + arregloAccesos[i].getPlaca() +
-                     ", Filial: " + arregloAccesos[i].getFilial() +
-                     ", Condicion: " + arregloAccesos[i].getCondicion() +
-                     ", Fecha: " + arregloAccesos[i].getFecha();
-            }
-        }
-        
-        System.out.println(linea);
     }
     
-    private void setAcceso(Accesos[] acceso){
+    private void setAcceso(Accesos acceso){
         archivo.escribirArchivoHistorial(acceso);
     }
     
