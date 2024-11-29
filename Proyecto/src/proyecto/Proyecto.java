@@ -18,57 +18,68 @@ public class Proyecto {
     public static void main(String[] args) {
         // TODO code application logic here
         GestionQuickPass gestionQuickPass = new GestionQuickPass();
-        boolean salir = false;
+        GestionAcceso gestionAcceso = new GestionAcceso();
         
-        while (!salir) {
-            // Menú Principal
-            String menu = "MENU PRINCIPAL\n"
-                    + "1. Gestión QuickPass\n"
-                    + "2. Gestión Accesos\n"
-                    + "3. Reportes\n"
-                    + "0. Salir\n"
-                    + "Ingrese una opción: ";
-            
-            String opcion = JOptionPane.showInputDialog(null, menu);
+        boolean continuar = true;
+
+        while (continuar) {
+            String menuPrincipal = """
+                    MENÚ PRINCIPAL
+                    1. Gestión QuickPass
+                    2. Gestión Accesos
+                    3. Reportes
+                    4. Salir
+                    Ingrese el número de la opción deseada:
+                    """;
+
+            String opcion = JOptionPane.showInputDialog(menuPrincipal);
+
+            if (opcion == null) { // Si el usuario presiona cancelar
+                break;
+            }
 
             switch (opcion) {
                 case "1":
-                    menuQuickPass(gestionQuickPass);
+                    menuGestionQuickPass(gestionQuickPass);
                     break;
                 case "2":
-                    
-                    JOptionPane.showMessageDialog(null, "Funcionalidad no implementada aún.");
+                    menuGestionAccesos(gestionAcceso, gestionQuickPass);
                     break;
                 case "3":
-                    
-                    JOptionPane.showMessageDialog(null, "Funcionalidad no implementada aún.");
+                    menuReportes(gestionQuickPass);
                     break;
-                case "0":
-                    salir = true;
-                    JOptionPane.showMessageDialog(null, "Gracias por usar el sistema.");
+                case "4":
+                    JOptionPane.showMessageDialog(null, "Saliendo del sistema...");
+                    continuar = false;
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Opción no válida. Intente nuevamente.");
+                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, intente nuevamente.");
+                    break;
             }
         }
     }
 
-    public static void menuQuickPass(GestionQuickPass gestionQuickPass) {
-        boolean salirQuickPass = false;
+    private static void menuGestionQuickPass(GestionQuickPass gestionQuickPass) {
+        boolean continuar = true;
 
-        while (!salirQuickPass) {
-            
-            String menuQuickPass = "GESTIÓN QUICKPASS\n"
-                    + "1. Agregar QuickPass\n"
-                    + "2. Visualizar QuickPass\n"
-                    + "3. Eliminar QuickPass\n"
-                    + "4. Desactivar QuickPass\n"
-                    + "5. Volver al Menú Principal\n"
-                    + "Ingrese una opción: ";
+        while (continuar) {
+            String menuQuickPass = """
+                    GESTIÓN QUICKPASS
+                    1. Agregar QuickPass
+                    2. Visualizar QuickPass
+                    3. Eliminar QuickPass
+                    4. Modificar QuickPass (No implementada)
+                    5. Volver al menú principal
+                    Ingrese el número de la opción deseada:
+                    """;
 
-            String opcionQuickPass = JOptionPane.showInputDialog(null, menuQuickPass);
+            String opcion = JOptionPane.showInputDialog(menuQuickPass);
 
-            switch (opcionQuickPass) {
+            if (opcion == null) { // Si el usuario presiona cancelar
+                break;
+            }
+
+            switch (opcion) {
                 case "1":
                     gestionQuickPass.agregarQuickPass();
                     break;
@@ -79,18 +90,115 @@ public class Proyecto {
                     gestionQuickPass.eliminarQuickPass();
                     break;
                 case "4":
-                    
-                    String codigoDesactivar = JOptionPane.showInputDialog(null, "Ingrese el código del QuickPass a desactivar: ");
-                    if (codigoDesactivar != null && !codigoDesactivar.isEmpty()) {
-                        int codigo = Integer.parseInt(codigoDesactivar);
-                        gestionQuickPass.desactivarQuickPass(codigo);
-                    }
+                    JOptionPane.showMessageDialog(null, "Modificar QuickPass aún no está implementada.");
                     break;
                 case "5":
-                    salirQuickPass = true;
+                    continuar = false;
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Opción no válida. Intente nuevamente.");
+                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, intente nuevamente.");
+                    break;
+            }
+        }
+    }
+
+    private static void menuGestionAccesos(GestionAcceso gestionAcceso, GestionQuickPass gestionQuickPass) {
+        boolean continuar = true;
+
+        while (continuar) {
+            String menuAccesos = """
+                    GESTIÓN ACCESOS
+                    1. Agregar Acceso
+                    2. Visualizar Acceso
+                    3. Visualizar acceso por filial
+                    4. Visualizar acceso por rango de fecha
+                    5. Visualizar acceso por código
+                    6. Visualizar acceso por placa
+                    7. Volver al menú principal
+                    Ingrese el número de la opción deseada:
+                    """;
+
+            String opcion = JOptionPane.showInputDialog(menuAccesos);
+
+            if (opcion == null) { // Si el usuario presiona cancelar
+                break;
+            }
+
+            switch (opcion) {
+                case "1":
+                    String sms = "";
+                    QuickPass quickPass = gestionQuickPass.getArregloQuickPassperCodigo();
+                    sms = gestionAcceso.consulta(quickPass);
+                    System.out.println(sms);
+                    break;
+                case "2":
+                    JOptionPane.showMessageDialog(null, "Función Visualizar Acceso aún no implementada.");
+                    break;
+                case "3":
+                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por filial aún no implementada.");
+                    break;
+                case "4":
+                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por rango de fecha aún no implementada.");
+                    break;
+                case "5":
+                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por código aún no implementada.");
+                    break;
+                case "6":
+                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por placa aún no implementada.");
+                    break;
+                case "7":
+                    continuar = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, intente nuevamente.");
+                    break;
+            }
+        }
+    }
+
+    private static void menuReportes(GestionQuickPass gestionQuickPass) {
+        boolean continuar = true;
+
+        while (continuar) {
+            String menuReportes = """
+                    REPORTES
+                    1. Total accesos registrados
+                    2. Total de accesos por filial
+                    3. Total de QuickPass registrados
+                    4. Total de QuickPass Activos e Inactivos
+                    5. Total de QuickPass eliminados
+                    6. Volver al menú principal
+                    Ingrese el número de la opción deseada:
+                    """;
+
+            String opcion = JOptionPane.showInputDialog(menuReportes);
+
+            if (opcion == null) { // Si el usuario presiona cancelar
+                break;
+            }
+
+            switch (opcion) {
+                case "1":
+                    JOptionPane.showMessageDialog(null, "Función Total accesos registrados aún no implementada.");
+                    break;
+                case "2":
+                    JOptionPane.showMessageDialog(null, "Función Total de accesos por filial aún no implementada.");
+                    break;
+                case "3":
+                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass registrados aún no implementada.");
+                    break;
+                case "4":
+                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass Activos e Inactivos aún no implementada.");
+                    break;
+                case "5":
+                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass eliminados aún no implementada.");
+                    break;
+                case "6":
+                    continuar = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, intente nuevamente.");
+                    break;
             }
         }
     }
