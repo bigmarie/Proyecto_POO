@@ -22,6 +22,8 @@ public class GestionAcceso {
         
         String fecha = formato.format(fechaActual);
         
+        getAllAccesos();
+        
         if(arreglo == null){
             for(int i = 0; i < arregloAccesos.length; i++){
             if(arregloAccesos[i] == null){
@@ -56,8 +58,33 @@ public class GestionAcceso {
                 return "ACEPTADO";
                 }
             }
-        
         return null;
     }
+    
+    private void getAllAccesos(){
+        Accesos datos[] = archivo.leerArchivoHistorial();
+        String linea = "";
+        
+        for(int i = 0; i < datos.length; i++){
+            arregloAccesos[i] = datos[i];
+        }
+        
+        for(int i = 0; i < arregloAccesos.length; i++){
+            if(arregloAccesos[i]!=null){
+                linea += "\n" + "Codigo: " + arregloAccesos[i].getCodigo() +
+                     ", Placa: " + arregloAccesos[i].getPlaca() +
+                     ", Filial: " + arregloAccesos[i].getFilial() +
+                     ", Condicion: " + arregloAccesos[i].getCondicion() +
+                     ", Fecha: " + arregloAccesos[i].getFecha();
+            }
+        }
+        
+        System.out.println(linea);
+    }
+    
+    private void setAcceso(Accesos[] acceso){
+        archivo.escribirArchivoHistorial(acceso);
+    }
+    
     // Fin
 }
