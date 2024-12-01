@@ -6,7 +6,8 @@ package proyecto;
 import java.io.*;
 import java.util.*;
 import java.text.SimpleDateFormat;
-
+import javax.swing.JOptionPane;
+import java.text.ParseException;
 /**
  *
  * @author Nicole
@@ -78,5 +79,210 @@ public class GestionAcceso {
         archivo.escribirArchivoHistorial(acceso);
     }
     
+    // VALIDACIONES
+    // Validacion Codigo
+    private boolean esCodigo(String codigo){
+        if(codigo.length() < 10){
+            return false;
+        }
+        
+        if(!codigo.substring(0,3).equals("101")){
+            return false;
+        }
+        
+        // validar codigo es numerico
+        for(int i = 0; i < codigo.length();i++){
+            char c = codigo.charAt(i);
+            if(!Character.isDigit(c)){
+                    return false;
+                }  
+        }
+        return true;
+    }
+    
+    // Validacion Placa
+    private boolean esPlaca(String placa){
+        if(placa.length() != 6){
+            return false;
+        }
+        
+        // validar codigo es numerico
+        for(int i = 0; i < placa.length();i++){
+            char c = placa.charAt(i);
+            if(!Character.isDigit(c)){
+                    return false;
+                }  
+        }
+        return true;
+    }
+    
+    // Validacion Filial
+    private boolean esFilial(String string){
+        
+        if(string.length() != 3){
+            return false;
+        }
+        
+        for(int i = 0; i < string.length();i++){
+            char c = string.charAt(i);
+            if( i == 0){
+                if(!Character.isLetter(c)){
+                    return false;
+                }
+            }else{
+                if(!Character.isDigit(c)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    private boolean esFecha(String string){
+        if (string == null || string.trim().isEmpty()) {
+        return false;
+        }
+        
+        if(string.length() != 10){
+            return false;
+        }
+        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false); // Para validar fechas estrictamente
+        try {
+            formato.parse(string);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    
+    public void visualizarAccesos(){
+        getAllAccesos();
+        String r = "";
+        for(int i = 0; i < arregloAccesos.length;i++){
+            if(arregloAccesos[i]!=null){
+                int puesto = i + 1;
+                r += "\n" + puesto + ". Codigo: " + arregloAccesos[i].getCodigo()
+                + " Filial: " + arregloAccesos[i].getFilial()
+                + " Placa: " + arregloAccesos[i].getPlaca()
+                + " Condicion: " + arregloAccesos[i].getCondicion()
+                + " Fecha: " + arregloAccesos[i].getFecha();
+            }
+        }
+        System.out.println(r);
+    }
+    
+    public void visualizarPorCodigo(){
+        getAllAccesos();
+        boolean esValido = false;
+        
+        while(!esValido){
+            String input = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+            if(!esCodigo(input)){
+                System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+            }else{
+                int codigo = Integer.parseInt(input);
+                for(int i = 0; i < arregloAccesos.length;i++){
+                    if(arregloAccesos[i]!=null){
+                        if(arregloAccesos[i].getCodigo()==codigo){
+                            String r = "";
+                            r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
+                                    " Filial: " + arregloAccesos[i].getFilial() +
+                                    " Placa: " + arregloAccesos[i].getPlaca() + 
+                                    " Condicion: " + arregloAccesos[i].getCondicion() +
+                                    " Fecha: " + arregloAccesos[i].getFecha();
+                            System.out.println(r);
+                        }
+                    }
+                }
+                esValido = true;
+            }
+        }
+    }
+    
+    public void visualizarPorPlaca(){
+        getAllAccesos();
+        boolean esValido = false;
+        
+        while(!esValido){
+            String input = JOptionPane.showInputDialog(null, "Ingrese la placa: ");
+            if(!esPlaca(input)){
+                System.out.println("Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
+            }else{
+                int placa = Integer.parseInt(input);
+                for(int i = 0; i < arregloAccesos.length;i++){
+                    if(arregloAccesos[i]!=null){
+                        if(arregloAccesos[i].getPlaca()==placa){
+                            String r = "";
+                            r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
+                                    " Filial: " + arregloAccesos[i].getFilial() +
+                                    " Placa: " + arregloAccesos[i].getPlaca() + 
+                                    " Condicion: " + arregloAccesos[i].getCondicion() +
+                                    " Fecha: " + arregloAccesos[i].getFecha();
+                            System.out.println(r);
+                        }
+                    }
+                }
+                esValido = true;
+            }
+        }
+    }
+    
+    public void visualizarPorFilial(){
+        getAllAccesos();
+        boolean esValido = false;
+        
+        while(!esValido){
+            String filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+            if(!esFilial(filial)){
+                System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+            }else{
+                for(int i = 0; i < arregloAccesos.length;i++){
+                    if(arregloAccesos[i]!=null){
+                        if(arregloAccesos[i].getFilial().equals(filial)){
+                            String r = "";
+                            r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
+                                    " Filial: " + arregloAccesos[i].getFilial() +
+                                    " Placa: " + arregloAccesos[i].getPlaca() + 
+                                    " Condicion: " + arregloAccesos[i].getCondicion() +
+                                    " Fecha: " + arregloAccesos[i].getFecha();
+                            System.out.println(r);
+                        }
+                    }
+                }
+                esValido = true;
+            }
+        }   
+    }
+    
+    public void visualizarPorFecha(){
+        getAllAccesos();
+        boolean esValido = false;
+        
+        while(!esValido){
+            String fecha = JOptionPane.showInputDialog(null, "Ingrese el dia: ");
+            if(!esFecha(fecha)){
+                System.out.println("Fecha tiene que ser en formato valido (DD/MM/YYYY)(i.e.:29/11/2024)");
+            }else{
+                fecha += "%";
+                for(int i = 0; i < arregloAccesos.length;i++){
+                    if(arregloAccesos[i]!=null){
+                        String fechaArreglo = arregloAccesos[i].getFecha().substring(0,10);
+                        if(fechaArreglo.equals(fecha)){
+                            String r = "";
+                            r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
+                                    " Filial: " + arregloAccesos[i].getFilial() +
+                                    " Placa: " + arregloAccesos[i].getPlaca() + 
+                                    " Condicion: " + arregloAccesos[i].getCondicion() +
+                                    " Fecha: " + arregloAccesos[i].getFecha();
+                            System.out.println(r);
+                        }
+                    }
+                }
+                esValido = true;
+            }
+        }   
+    }
     // Fin
 }

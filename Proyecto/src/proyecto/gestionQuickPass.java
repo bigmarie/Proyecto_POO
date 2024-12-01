@@ -412,5 +412,16 @@ public class GestionQuickPass{
         return null;
     }
 
+    // MODIFICAR
+        public void desactivarQuickPass(int codigo) {
+        for (int i = 0; i < arregloQuickPass.length; i++) {
+            if (arregloQuickPass[i] != null && arregloQuickPass[i].getCodigo() == codigo) {
+                arregloQuickPass[i].setEstado(Estado.INACTIVO);  // Cambiar estado a INACTIVO
+                JOptionPane.showMessageDialog(null, "QuickPass desactivado.");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "QuickPass con ese código no encontrado.");
+    }
 // Fin
 }

@@ -28,7 +28,7 @@ public class Proyecto {
                     1. Gestión QuickPass
                     2. Gestión Accesos
                     3. Reportes
-                    4. Salir
+                    0. Salir
                     Ingrese el número de la opción deseada:
                     """;
 
@@ -48,7 +48,7 @@ public class Proyecto {
                 case "3":
                     menuReportes(gestionQuickPass);
                     break;
-                case "4":
+                case "0":
                     JOptionPane.showMessageDialog(null, "Saliendo del sistema...");
                     continuar = false;
                     break;
@@ -69,7 +69,7 @@ public class Proyecto {
                     2. Visualizar QuickPass
                     3. Eliminar QuickPass
                     4. Modificar QuickPass (No implementada)
-                    5. Volver al menú principal
+                    0. Volver al menú principal
                     Ingrese el número de la opción deseada:
                     """;
 
@@ -90,9 +90,13 @@ public class Proyecto {
                     gestionQuickPass.eliminarQuickPass();
                     break;
                 case "4":
-                    JOptionPane.showMessageDialog(null, "Modificar QuickPass aún no está implementada.");
+                    String codigoDesactivar = JOptionPane.showInputDialog(null, "Ingrese el código del QuickPass a desactivar: ");
+                    if (codigoDesactivar != null && !codigoDesactivar.isEmpty()) {
+                        int codigo = Integer.parseInt(codigoDesactivar);
+                        gestionQuickPass.desactivarQuickPass(codigo);
+                    }
                     break;
-                case "5":
+                case "0":
                     continuar = false;
                     break;
                 default:
@@ -109,12 +113,12 @@ public class Proyecto {
             String menuAccesos = """
                     GESTIÓN ACCESOS
                     1. Agregar Acceso
-                    2. Visualizar Acceso
+                    2. Visualizar Accesos
                     3. Visualizar acceso por filial
                     4. Visualizar acceso por rango de fecha
                     5. Visualizar acceso por código
                     6. Visualizar acceso por placa
-                    7. Volver al menú principal
+                    0. Volver al menú principal
                     Ingrese el número de la opción deseada:
                     """;
 
@@ -132,21 +136,21 @@ public class Proyecto {
                     System.out.println(sms);
                     break;
                 case "2":
-                    JOptionPane.showMessageDialog(null, "Función Visualizar Acceso aún no implementada.");
+                    gestionAcceso.visualizarAccesos();
                     break;
                 case "3":
-                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por filial aún no implementada.");
+                    gestionAcceso.visualizarPorFilial();
                     break;
                 case "4":
-                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por rango de fecha aún no implementada.");
+                    gestionAcceso.visualizarPorFecha();
                     break;
                 case "5":
-                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por código aún no implementada.");
+                    gestionAcceso.visualizarPorCodigo();
                     break;
                 case "6":
-                    JOptionPane.showMessageDialog(null, "Función Visualizar acceso por placa aún no implementada.");
+                    gestionAcceso.visualizarPorPlaca();
                     break;
-                case "7":
+                case "0":
                     continuar = false;
                     break;
                 default:
