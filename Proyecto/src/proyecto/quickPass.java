@@ -57,4 +57,11 @@ public class QuickPass {
     public void setEstado(Estado estado){
        this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Filial=" + filial + ", Codigo=" + codigo + ", Placa=" + placa + ", Estado=" + estado;
+    }
+    
+    
 }
