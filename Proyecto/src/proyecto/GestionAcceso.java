@@ -30,7 +30,7 @@ public class GestionAcceso {
             if(arregloAccesos[i] == null){
                 Accesos acceso = new Accesos("",0,0,Condicion.RECHAZADO,fecha);
                 arregloAccesos[i] = acceso;
-                System.out.println("Codigo no existe en la lista");
+                JOptionPane.showMessageDialog(null,"Codigo no existe en la lista");
                 Accesos arregloAcceso = arregloAccesos[i];
                 setAcceso(arregloAcceso);
                 return "RECHAZADO";
@@ -48,7 +48,7 @@ public class GestionAcceso {
             if(arregloAccesos[i] == null){
                 Accesos acceso = new Accesos(filial,codigo,placa,Condicion.RECHAZADO,fecha);
                 arregloAccesos[i] = acceso;
-                System.out.println("QuickPass inactivo");
+                JOptionPane.showMessageDialog(null,"QuickPass inactivo");
                 Accesos arregloAcceso = arregloAccesos[i];
                 setAcceso(arregloAcceso);
                 return "RECHAZADO";
@@ -170,7 +170,7 @@ public class GestionAcceso {
                 + " Fecha: " + arregloAccesos[i].getFecha();
             }
         }
-        System.out.println(r);
+        JOptionPane.showMessageDialog(null,r);
     }
     
     public void visualizarPorCodigo(){
@@ -180,7 +180,7 @@ public class GestionAcceso {
         while(!esValido){
             String input = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
             if(!esCodigo(input)){
-                System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
             }else{
                 int codigo = Integer.parseInt(input);
                 for(int i = 0; i < arregloAccesos.length;i++){
@@ -192,7 +192,7 @@ public class GestionAcceso {
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            System.out.println(r);
+                            JOptionPane.showMessageDialog(null,r);
                         }
                     }
                 }
@@ -208,7 +208,7 @@ public class GestionAcceso {
         while(!esValido){
             String input = JOptionPane.showInputDialog(null, "Ingrese la placa: ");
             if(!esPlaca(input)){
-                System.out.println("Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
+                JOptionPane.showMessageDialog(null,"Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
             }else{
                 int placa = Integer.parseInt(input);
                 for(int i = 0; i < arregloAccesos.length;i++){
@@ -220,7 +220,7 @@ public class GestionAcceso {
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            System.out.println(r);
+                            JOptionPane.showMessageDialog(null,r);
                         }
                     }
                 }
@@ -236,7 +236,7 @@ public class GestionAcceso {
         while(!esValido){
             String filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
             if(!esFilial(filial)){
-                System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
             }else{
                 for(int i = 0; i < arregloAccesos.length;i++){
                     if(arregloAccesos[i]!=null){
@@ -247,7 +247,7 @@ public class GestionAcceso {
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            System.out.println(r);
+                            JOptionPane.showMessageDialog(null,r);
                         }
                     }
                 }
@@ -263,7 +263,7 @@ public class GestionAcceso {
         while(!esValido){
             String fecha = JOptionPane.showInputDialog(null, "Ingrese el dia: ");
             if(!esFecha(fecha)){
-                System.out.println("Fecha tiene que ser en formato valido (DD/MM/YYYY)(i.e.:29/11/2024)");
+                JOptionPane.showMessageDialog(null,"Fecha tiene que ser en formato valido (DD/MM/YYYY)(i.e.:29/11/2024)");
             }else{
                 fecha += "%";
                 for(int i = 0; i < arregloAccesos.length;i++){
@@ -276,7 +276,7 @@ public class GestionAcceso {
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            System.out.println(r);
+                            JOptionPane.showMessageDialog(null,r);
                         }
                     }
                 }

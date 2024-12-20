@@ -34,7 +34,7 @@ public class Proyecto {
 
             String opcion = JOptionPane.showInputDialog(menuPrincipal);
 
-            if (opcion == null) { // Si el usuario presiona cancelar
+            if (opcion == null) { 
                 break;
             }
 
@@ -68,7 +68,7 @@ public class Proyecto {
                     1. Agregar QuickPass
                     2. Visualizar QuickPass
                     3. Eliminar QuickPass
-                    4. Modificar QuickPass (No implementada)
+                    4. Modificar QuickPass
                     0. Volver al menú principal
                     Ingrese el número de la opción deseada:
                     """;
@@ -90,11 +90,40 @@ public class Proyecto {
                     gestionQuickPass.eliminarQuickPass();
                     break;
                 case "4":
+                    boolean est = true;
+                    while (est){
+                    String estados = """
+                                    Estados
+                                   1. Activar
+                                   2. Desactivar
+                                   0. Salir""";
+                    String opcs = JOptionPane.showInputDialog(estados);    
+                    if (opcs == null) { 
+                break;
+            }
+                    switch (opcs){
+                        case "1":
+                    String codigoActivar = JOptionPane.showInputDialog(null, "Ingrese el código del QuickPass a activar: ");
+                     if (codigoActivar != null && !codigoActivar.isEmpty()) {
+                         int codigo = Integer.parseInt(codigoActivar);
+                     gestionQuickPass.activarQuickPass(codigo);
+                    }
+                     break;
+                        case "2":
                     String codigoDesactivar = JOptionPane.showInputDialog(null, "Ingrese el código del QuickPass a desactivar: ");
                     if (codigoDesactivar != null && !codigoDesactivar.isEmpty()) {
                         int codigo = Integer.parseInt(codigoDesactivar);
                         gestionQuickPass.desactivarQuickPass(codigo);
                     }
+                    break;
+                    case "0":
+                    est = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, intente nuevamente.");
+                    break;
+                    }}
+
                     break;
                 case "0":
                     continuar = false;
@@ -133,7 +162,7 @@ public class Proyecto {
                     String sms = "";
                     QuickPass quickPass = gestionQuickPass.getArregloQuickPassperCodigo();
                     sms = gestionAcceso.consulta(quickPass);
-                    System.out.println(sms);
+                    JOptionPane.showMessageDialog(null,sms);
                     break;
                 case "2":
                     gestionAcceso.visualizarAccesos();
