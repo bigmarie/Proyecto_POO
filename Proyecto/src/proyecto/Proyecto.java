@@ -19,6 +19,7 @@ public class Proyecto {
         // TODO code application logic here
         GestionQuickPass gestionQuickPass = new GestionQuickPass();
         GestionAcceso gestionAcceso = new GestionAcceso();
+        Reporte reporte = new Reporte();
         
         boolean continuar = true;
 
@@ -46,7 +47,7 @@ public class Proyecto {
                     menuGestionAccesos(gestionAcceso, gestionQuickPass);
                     break;
                 case "3":
-                    menuReportes(gestionQuickPass, gestionAcceso);
+                    menuReportes(gestionQuickPass, gestionAcceso, reporte);
                     break;
                 case "0":
                     JOptionPane.showMessageDialog(null, "Saliendo del sistema...");
@@ -189,7 +190,7 @@ public class Proyecto {
         }
     }
 
-    private static void menuReportes(GestionQuickPass gestionQuickPass, GestionAcceso gestionAcceso) {
+    private static void menuReportes(GestionQuickPass gestionQuickPass, GestionAcceso gestionAcceso, Reporte reporte) {
         boolean continuar = true;
 
         while (continuar) {
@@ -200,7 +201,7 @@ public class Proyecto {
                     3. Total de QuickPass registrados
                     4. Total de QuickPass Activos e Inactivos
                     5. Total de QuickPass eliminados
-                    6. Volver al menú principal
+                    0. Volver al menú principal
                     Ingrese el número de la opción deseada:
                     """;
 
@@ -218,15 +219,37 @@ public class Proyecto {
                     gestionAcceso.visualizarTodosPorFilial();
                     break;
                 case "3":
-                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass registrados aún no implementada.");
+                    reporte.totalQuickPass(gestionQuickPass.getArregloQuickPass("QuickPass"));
                     break;
                 case "4":
-                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass Activos e Inactivos aún no implementada.");
+                    String m = """
+                               REPORTES ACTIVO E INACTIVO
+                               1. Total Activos
+                               2. Total Inactivos no eliminados
+                               3. Total Inactivos eliminados
+                               """;
+                    String opc = JOptionPane.showInputDialog(m);
+                    if (opc == null) { // Si el usuario presiona cancelar
+                        break;
+                    }
+                    switch(opc){
+                        case "1":
+                            reporte.totalActivos(gestionQuickPass.getArregloQuickPass("QuickPass"));
+                            break;
+                        case "2":
+                            reporte.totalInactivos(gestionQuickPass.getArregloQuickPass("QuickPass"));
+                            break;
+                        case "3":
+                            reporte.totalInactivos(gestionQuickPass.getArregloQuickPass("Eliminados"));
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case "5":
-                    JOptionPane.showMessageDialog(null, "Función Total de QuickPass eliminados aún no implementada.");
+                    reporte.totalQuickPass(gestionQuickPass.getArregloQuickPass("Eliminados"));
                     break;
-                case "6":
+                case "0":
                     continuar = false;
                     break;
                 default:

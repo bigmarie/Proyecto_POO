@@ -4,6 +4,7 @@
  */
 package proyecto;
 
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -102,6 +103,7 @@ public class GestionQuickPass{
     private void agregarArregloEliminado(QuickPass quickPassEliminado){
         for(int i = 0; i < quickPassEliminados.length;i++){
             if(quickPassEliminados[i]==null){
+                quickPassEliminado.setEstado(Estado.INACTIVO);
                 quickPassEliminados[i] = quickPassEliminado;
                 return;
             }
@@ -412,6 +414,18 @@ public class GestionQuickPass{
         return null;
     }
 
+    public QuickPass[] getArregloQuickPass(String arreglo){
+        switch(arreglo){
+            case "QuickPass":
+                return arregloQuickPass;
+            case "Eliminados":
+                return quickPassEliminados;
+            default:
+                break;
+        }
+        return null;
+    }
+    
     // MODIFICAR
         public void desactivarQuickPass(int codigo) {
         for (int i = 0; i < arregloQuickPass.length; i++) {
