@@ -179,23 +179,33 @@ public class GestionAcceso {
         
         while(!esValido){
             String input = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+            if (input == null) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return; // Salir del método si se da cancelar
+            }
             if(!esCodigo(input)){
                 JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
             }else{
                 int codigo = Integer.parseInt(input);
+                String r = "";
+                boolean encontrado = false;
                 for(int i = 0; i < arregloAccesos.length;i++){
                     if(arregloAccesos[i]!=null){
                         if(arregloAccesos[i].getCodigo()==codigo){
-                            String r = "";
+                            encontrado = true;
                             r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
                                     " Filial: " + arregloAccesos[i].getFilial() +
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            JOptionPane.showMessageDialog(null,r);
+                            
                         }
                     }
                 }
+                if (!encontrado) {
+                    r = "No existe un registro de acceso con el codigo ingresada.";
+                }
+                JOptionPane.showMessageDialog(null,r);
                 esValido = true;
             }
         }
@@ -207,23 +217,33 @@ public class GestionAcceso {
         
         while(!esValido){
             String input = JOptionPane.showInputDialog(null, "Ingrese la placa: ");
+            if (input == null) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return; // Salir del método si se da cancelar
+            }
             if(!esPlaca(input)){
                 JOptionPane.showMessageDialog(null,"Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
             }else{
                 int placa = Integer.parseInt(input);
+                String r = "";
+                boolean encontrado = false;
                 for(int i = 0; i < arregloAccesos.length;i++){
                     if(arregloAccesos[i]!=null){
                         if(arregloAccesos[i].getPlaca()==placa){
-                            String r = "";
+                            encontrado = true;
                             r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
                                     " Filial: " + arregloAccesos[i].getFilial() +
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            JOptionPane.showMessageDialog(null,r);
+                            
                         }
                     }
                 }
+                if (!encontrado) {
+                    r = "No existe un registro de acceso con la placa ingresada.";
+                }
+                JOptionPane.showMessageDialog(null,r);
                 esValido = true;
             }
         }
@@ -235,22 +255,32 @@ public class GestionAcceso {
         
         while(!esValido){
             String filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+            if (filial == null) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return; // Salir del método si se da cancelar
+            }
             if(!esFilial(filial)){
                 JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
             }else{
+                String r = "";
+                boolean encontrado = false;
                 for(int i = 0; i < arregloAccesos.length;i++){
                     if(arregloAccesos[i]!=null){
                         if(arregloAccesos[i].getFilial().equals(filial)){
-                            String r = "";
+                            encontrado = true;
                             r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
                                     " Filial: " + arregloAccesos[i].getFilial() +
                                     " Placa: " + arregloAccesos[i].getPlaca() + 
                                     " Condicion: " + arregloAccesos[i].getCondicion() +
                                     " Fecha: " + arregloAccesos[i].getFecha();
-                            JOptionPane.showMessageDialog(null,r);
+                            
                         }
                     }
                 }
+                if (!encontrado) {
+                    r = "No existe un registro de acceso con la filial ingresada.";
+                }
+                JOptionPane.showMessageDialog(null,r);
                 esValido = true;
             }
         }   
