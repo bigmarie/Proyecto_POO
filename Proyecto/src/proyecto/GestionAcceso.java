@@ -291,25 +291,36 @@ public class GestionAcceso {
         boolean esValido = false;
         
         while(!esValido){
-            String fecha = JOptionPane.showInputDialog(null, "Ingrese el dia: ");
+            String fecha = JOptionPane.showInputDialog(null, "Ingrese el dia (formato DD/MM/YYYY): ");
+            if (fecha == null || fecha.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada o fecha vacía.");
+                return;
+            }
             if(!esFecha(fecha)){
                 JOptionPane.showMessageDialog(null,"Fecha tiene que ser en formato valido (DD/MM/YYYY)(i.e.:29/11/2024)");
             }else{
-                fecha += "%";
-                for(int i = 0; i < arregloAccesos.length;i++){
-                    if(arregloAccesos[i]!=null){
-                        String fechaArreglo = arregloAccesos[i].getFecha().substring(0,10);
-                        if(fechaArreglo.equals(fecha)){
-                            String r = "";
+            String r = "";
+                boolean encontrado = false;
+
+                for (int i = 0; i < arregloAccesos.length; i++) {
+                    if (arregloAccesos[i] != null) {
+                        String fechaArreglo = arregloAccesos[i].getFecha().substring(0, 10);
+                        if (fechaArreglo.equals(fecha)) {
+                            encontrado = true;
                             r += "\n" + i + ". Codigo: " + arregloAccesos[i].getCodigo() +
-                                    " Filial: " + arregloAccesos[i].getFilial() +
-                                    " Placa: " + arregloAccesos[i].getPlaca() + 
-                                    " Condicion: " + arregloAccesos[i].getCondicion() +
-                                    " Fecha: " + arregloAccesos[i].getFecha();
-                            JOptionPane.showMessageDialog(null,r);
+                                 " Filial: " + arregloAccesos[i].getFilial() +
+                                 " Placa: " + arregloAccesos[i].getPlaca() +
+                                 " Condicion: " + arregloAccesos[i].getCondicion() +
+                                 " Fecha: " + arregloAccesos[i].getFecha();
                         }
                     }
                 }
+
+                if (!encontrado) {
+                    r = "No existen registros con la fecha ingresada.";
+                }
+
+                JOptionPane.showMessageDialog(null, r);
                 esValido = true;
             }
         }   
