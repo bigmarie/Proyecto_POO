@@ -314,6 +314,7 @@ public class GestionAcceso {
             }
         }   
     }
+    
     public void visualizarTodosPorFilial(){
         getAllAccesos();
         String r = "";
@@ -326,13 +327,11 @@ public class GestionAcceso {
         }
         JOptionPane.showMessageDialog(null,r);
     }
-        
-        
-        
-        
-        
-        
-        
+    
+    public Accesos[] getAccesos(){
+        getAllAccesos();
+        return arregloAccesos;
     }
     // Fin
+}
 

@@ -213,10 +213,10 @@ public class Proyecto {
 
             switch (opcion) {
                 case "1":
-                    gestionAcceso.visualizarAccesos();
+                    reporte.totalAccesos(gestionAcceso.getAccesos());
                     break;
                 case "2":
-                    gestionAcceso.visualizarTodosPorFilial();
+                    reporte.totalFilial(gestionAcceso.getAccesos());
                     break;
                 case "3":
                     reporte.totalQuickPass(gestionQuickPass.getArregloQuickPass("QuickPass"));
