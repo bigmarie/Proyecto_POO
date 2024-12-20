@@ -68,7 +68,7 @@ public class GestionAcceso {
         return null;
     }
     
-    private void getAllAccesos(){
+    void getAllAccesos(){
         Accesos datos[] = archivo.leerArchivoHistorial();
         for(int i = 0; i < datos.length; i++){
             arregloAccesos[i] = datos[i];
@@ -284,5 +284,25 @@ public class GestionAcceso {
             }
         }   
     }
+    public void visualizarTodosPorFilial(){
+        getAllAccesos();
+        String r = "";
+        for(int i = 0; i < arregloAccesos.length;i++){
+            if(arregloAccesos[i]!=null){
+                int puesto = i + 1;
+                r += "\n" + puesto +". " + " Filial: " + arregloAccesos[i].getFilial()
+                + "    Condicion: " + arregloAccesos[i].getCondicion();
+            }
+        }
+        JOptionPane.showMessageDialog(null,r);
+    }
+        
+        
+        
+        
+        
+        
+        
+    }
     // Fin
-}
+

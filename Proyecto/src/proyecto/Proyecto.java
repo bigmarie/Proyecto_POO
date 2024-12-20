@@ -46,7 +46,7 @@ public class Proyecto {
                     menuGestionAccesos(gestionAcceso, gestionQuickPass);
                     break;
                 case "3":
-                    menuReportes(gestionQuickPass);
+                    menuReportes(gestionQuickPass, gestionAcceso);
                     break;
                 case "0":
                     JOptionPane.showMessageDialog(null, "Saliendo del sistema...");
@@ -189,7 +189,7 @@ public class Proyecto {
         }
     }
 
-    private static void menuReportes(GestionQuickPass gestionQuickPass) {
+    private static void menuReportes(GestionQuickPass gestionQuickPass, GestionAcceso gestionAcceso) {
         boolean continuar = true;
 
         while (continuar) {
@@ -212,10 +212,10 @@ public class Proyecto {
 
             switch (opcion) {
                 case "1":
-                    JOptionPane.showMessageDialog(null, "Función Total accesos registrados aún no implementada.");
+                    gestionAcceso.visualizarAccesos();
                     break;
                 case "2":
-                    JOptionPane.showMessageDialog(null, "Función Total de accesos por filial aún no implementada.");
+                    gestionAcceso.visualizarTodosPorFilial();
                     break;
                 case "3":
                     JOptionPane.showMessageDialog(null, "Función Total de QuickPass registrados aún no implementada.");

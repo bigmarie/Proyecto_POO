@@ -5,3 +5,8 @@ Codigo: 1010000001, Placa: 123123, Filial: A01, Condicion: RECHAZADO, Fecha: 29/
 Codigo: 1010000002, Placa: 123124, Filial: A01, Condicion: ACEPTADO, Fecha: 29/11/2024 20:26
 Codigo: 0, Placa: 0, Filial: , Condicion: RECHAZADO, Fecha: 19/12/2024 22:23
 Codigo: 0, Placa: 0, Filial: , Condicion: RECHAZADO, Fecha: 19/12/2024 23:49
+Codigo: 0, Placa: 0, Filial: , Condicion: RECHAZADO, Fecha: 20/12/2024 11:12
+Codigo: 1011111111, Placa: 123123, Filial: A10, Condicion: ACEPTADO, Fecha: 20/12/2024 11:13
+Codigo: 0, Placa: 0, Filial: , Condicion: RECHAZADO, Fecha: 20/12/2024 11:13
+Codigo: 1011111111, Placa: 123123, Filial: A10, Condicion: ACEPTADO, Fecha: 20/12/2024 11:21
+Codigo: 1010000000, Placa: 123321, Filial: A11, Condicion: ACEPTADO, Fecha: 20/12/2024 11:21
