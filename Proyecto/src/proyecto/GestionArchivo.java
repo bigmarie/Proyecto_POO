@@ -5,6 +5,7 @@
 package proyecto;
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,13 +17,13 @@ public class GestionArchivo {
         try {
           File archivo = new File(nombre);
           if (archivo.createNewFile()) {
-            System.out.println("Archivo creado: " + archivo.getName());
+            JOptionPane.showMessageDialog(null,"Archivo creado: " + archivo.getName());
           } else {
-            System.out.println("Archivo ya existe.");
-            System.out.println("Directorio de trabajo actual: " + System.getProperty("user.dir"));
+            JOptionPane.showMessageDialog(null,"Archivo ya existe.");
+            JOptionPane.showMessageDialog(null,"Directorio de trabajo actual: " + System.getProperty("user.dir"));
           }
         } catch (IOException e) {
-          System.out.println("Ha ocurrido un error.");
+          JOptionPane.showMessageDialog(null,"Ha ocurrido un error.");
           e.printStackTrace();
             }
     }
@@ -59,7 +60,7 @@ public class GestionArchivo {
           }
           lector.close();
         } catch (FileNotFoundException e) {
-          System.out.println("Ha ocurrido un error.");
+          JOptionPane.showMessageDialog(null,"Ha ocurrido un error.");
           e.printStackTrace();
         }
         
@@ -80,7 +81,7 @@ public class GestionArchivo {
            }
            lector.close();
         } catch(IOException e){
-            System.out.println("Error al contar elementos");
+            JOptionPane.showMessageDialog(null,"Error al contar elementos");
             e.printStackTrace();
         }
         return contador;
@@ -99,9 +100,9 @@ public class GestionArchivo {
              archivo.write(linea);
          
          archivo.close();
-         System.out.println("Se ha escrito correctamente");
+         JOptionPane.showMessageDialog(null,"Se ha escrito correctamente");
        } catch (IOException e) {
-         System.out.println("Ha ocurrido un error.");
+         JOptionPane.showMessageDialog(null,"Ha ocurrido un error.");
          e.printStackTrace();
        }
     }

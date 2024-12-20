@@ -31,7 +31,7 @@ public class GestionQuickPass{
             if(arregloQuickPass[i] == null){
                 QuickPass nuevoQuickPass = new QuickPass(filial, codigo, placa, estado);
                 arregloQuickPass[i] = nuevoQuickPass;
-                System.out.println("QuickPass agregado correctamente");
+                JOptionPane.showMessageDialog(null,"QuickPass agregado correctamente");
                 return;
             }
         }
@@ -45,9 +45,9 @@ public class GestionQuickPass{
         while(!esValido){
             filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
             if(!esFilial(filial)){
-                System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
             }else{
-                System.out.println("Filial validada");
+                JOptionPane.showMessageDialog(null,"Filial validada");
                 esValido = true;
             }
         }
@@ -64,14 +64,14 @@ public class GestionQuickPass{
         while(!esValido){
            inputCodigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
            if(!esCodigo(inputCodigo)){
-               System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+               JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
            }else{
                codigo = Integer.parseInt(inputCodigo);
                if(!existeQuickPass(codigo)){
-                   System.out.println("Codigo validado");
+                   JOptionPane.showMessageDialog(null,"Codigo validado");
                    esValido = true;
                }else{
-                   System.out.println("Codigo en uso");
+                   JOptionPane.showMessageDialog(null,"Codigo en uso");
                }
            }
         }
@@ -89,10 +89,10 @@ public class GestionQuickPass{
         while(!esValido){
             inputPlaca = JOptionPane.showInputDialog(null, "Ingrese la placa: ");
             if(!esPlaca(inputPlaca)){
-                       System.out.println("Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
+                       JOptionPane.showMessageDialog(null,"Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
                    }else{
                        placa = Integer.parseInt(inputPlaca);
-                       System.out.println("Placa validada");
+                       JOptionPane.showMessageDialog(null,"Placa validada");
                        esValido = true;
                    }
                 }
@@ -194,12 +194,12 @@ public class GestionQuickPass{
                     while(!esValido){
                         codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
                         if(!esCodigo(codigo)){
-                            System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                            JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                         }else{
                             int codigoInt = Integer.parseInt(codigo);
                             eliminarQuickPassporCodigo(codigoInt);
                             esValido = true;
-                            System.out.println("Codigo eliminado");
+                            JOptionPane.showMessageDialog(null,"Codigo eliminado");
                         }
                     }
                     break;
@@ -207,16 +207,16 @@ public class GestionQuickPass{
                     while(!esValido){
                         filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
                         if(!esFilial(filial)){
-                            System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                            JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                         }else{
                             eliminarQuickPassporFilial(filial);
                             esValido = true;
-                            System.out.println("Filial eliminado");
+                            JOptionPane.showMessageDialog(null,"Filial eliminado");
                         }
                     }
                     break;
                 default:
-                    System.out.println("Opcion no valida");
+                    JOptionPane.showMessageDialog(null,"Opcion no valida");
                     break;
             }
         }
@@ -270,7 +270,7 @@ public class GestionQuickPass{
                                 while(!esValido){
                                     codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
                                     if(!esCodigo(codigo)){
-                                        System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                                        JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                                     }else{
                                         int codigoInt = Integer.parseInt(codigo);
                                         visualizarPorCodigo(codigoInt, arregloQuickPass);
@@ -282,7 +282,7 @@ public class GestionQuickPass{
                                 while(!esValido){
                                     filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
                                     if(!esFilial(filial)){
-                                        System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                                        JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                                     }else{
                                         visualizarPorFilial(filial, arregloQuickPass);
                                         esValido = true;
@@ -290,7 +290,7 @@ public class GestionQuickPass{
                                 }
                                 break;
                             default:
-                                System.out.println("Opcion no valida");
+                                JOptionPane.showMessageDialog(null,"Opcion no valida");
                                 break;
                         }
                     }
@@ -307,7 +307,7 @@ public class GestionQuickPass{
                                 while(!esValido){
                                     codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
                                     if(!esCodigo(codigo)){
-                                        System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                                        JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                                     }else{
                                         int codigoInt = Integer.parseInt(codigo);
                                         visualizarPorCodigo(codigoInt, quickPassEliminados);
@@ -319,7 +319,7 @@ public class GestionQuickPass{
                                 while(!esValido){
                                     filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
                                     if(!esFilial(filial)){
-                                        System.out.println("Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
+                                        JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                                     }else{
                                         visualizarPorFilial(filial, quickPassEliminados);
                                         esValido = true;
@@ -327,13 +327,13 @@ public class GestionQuickPass{
                                 }
                                 break;
                             default:
-                                System.out.println("Opcion no valida");
+                                JOptionPane.showMessageDialog(null,"Opcion no valida");
                                 break;
                         }
                     }
                 break;
                 default:
-                    System.out.println("Opcion no valida");
+                    JOptionPane.showMessageDialog(null, "Opcion no valida");
                 break;
             }
         }
@@ -347,7 +347,7 @@ public class GestionQuickPass{
                         " Filial: " + arreglo[i].getFilial() +
                         " Placa: " + arreglo[i].getPlaca() + 
                         " Estado: " + arreglo[i].getEstado();
-                System.out.println(r);
+                JOptionPane.showMessageDialog(null,r);
             }
         }
     }
@@ -361,7 +361,7 @@ public class GestionQuickPass{
                             " Filial: " + arreglo[i].getFilial() +
                             " Placa: " + arreglo[i].getPlaca() + 
                             " Estado: " + arreglo[i].getEstado();
-                    System.out.println(r);
+                    JOptionPane.showMessageDialog(null,r);
                 }
             }
         }
@@ -376,7 +376,7 @@ public class GestionQuickPass{
                             " Filial: " + arreglo[i].getFilial() +
                             " Placa: " + arreglo[i].getPlaca() + 
                             " Estado: " + arreglo[i].getEstado();
-                    System.out.println(r);
+                    JOptionPane.showMessageDialog(null,r);
                 }
             }
         }
@@ -392,7 +392,7 @@ public class GestionQuickPass{
             inputCodigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
             
             if(!esCodigo(inputCodigo)){
-                System.out.println("Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
+                JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
             }else{
                codigo = Integer.parseInt(inputCodigo);
                
@@ -418,6 +418,16 @@ public class GestionQuickPass{
             if (arregloQuickPass[i] != null && arregloQuickPass[i].getCodigo() == codigo) {
                 arregloQuickPass[i].setEstado(Estado.INACTIVO);  // Cambiar estado a INACTIVO
                 JOptionPane.showMessageDialog(null, "QuickPass desactivado.");
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "QuickPass con ese código no encontrado.");
+    }
+        public void activarQuickPass(int codigo) {
+        for (int i = 0; i < arregloQuickPass.length; i++) {
+            if (arregloQuickPass[i] != null && arregloQuickPass[i].getCodigo() == codigo) {
+                arregloQuickPass[i].setEstado(Estado.ACTIVO);  
+                JOptionPane.showMessageDialog(null, "QuickPass activado.");
                 return;
             }
         }
