@@ -60,7 +60,7 @@ public class QuickPass {
 
     @Override
     public String toString() {
-        return "Filial=" + filial + ", Codigo=" + codigo + ", Placa=" + placa + ", Estado=" + estado;
+        return "Filial: " + filial + ", Codigo: " + codigo + ", Placa: " + placa + ", Estado: " + estado;
     }
     
     

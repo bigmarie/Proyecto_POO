@@ -56,12 +56,17 @@ public class Accesos {
     public void setPlaca(int placa) {
         this.placa = placa;
     }
-
+    
     public Condicion getCondicion() {
         return condicion;
     }
 
     public void setCondicion(Condicion condicion) {
         this.condicion = condicion;
+    }
+    
+    @Override
+    public String toString() {
+        return "Filial: " + filial + ", Codigo: " + codigo + ", Placa: " + placa + ", Condicion: " + condicion + ", Fecha: " + fecha;
     }
 }
