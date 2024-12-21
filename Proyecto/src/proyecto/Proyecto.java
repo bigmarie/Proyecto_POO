@@ -162,8 +162,13 @@ public class Proyecto {
                 case "1":
                     String sms = "";
                     QuickPass quickPass = gestionQuickPass.getArregloQuickPassperCodigo();
-                    sms = gestionAcceso.consulta(quickPass);
-                    JOptionPane.showMessageDialog(null,sms);
+                    if (quickPass == null) {
+                        JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                    } else {
+                        // Solo si no se cancela, procedemos con la consulta
+                        sms = gestionAcceso.consulta(quickPass);
+                        JOptionPane.showMessageDialog(null, sms);
+                    }
                     break;
                 case "2":
                     gestionAcceso.visualizarAccesos();

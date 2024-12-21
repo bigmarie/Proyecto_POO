@@ -20,10 +20,18 @@ public class GestionQuickPass{
     public void agregarQuickPass(){
     
         String filial = agregarFilial(); 
+        if (filial == null) { // Si la operación fue cancelada
+            return; // Salir de la operación
+        }
         int codigo = agregarCodigo();
+        if (codigo == -1) { // Si la operación fue cancelada
+            return; // Salir de la operación
+        }
         int placa = agregarPlaca();
+        if (placa == -1) { // Si la operación fue cancelada
+            return; // Salir de la operación
+        }
         Estado estado = Estado.ACTIVO;
-        
         agregarArregloQuickPass(filial, codigo, placa, estado);
     }
     
@@ -45,6 +53,11 @@ public class GestionQuickPass{
         
         while(!esValido){
             filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+            
+            if (filial == null) { // Verificar si el usuario canceló
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return null; // Cancelar operación y retornar null
+            }
             if(!esFilial(filial)){
                 JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
             }else{
@@ -64,6 +77,10 @@ public class GestionQuickPass{
         
         while(!esValido){
            inputCodigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+           if (inputCodigo == null || inputCodigo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return -1; // Devuelve -1 para indicar que no se ingresó un código válido
+            }
            if(!esCodigo(inputCodigo)){
                JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
            }else{
@@ -89,6 +106,10 @@ public class GestionQuickPass{
         
         while(!esValido){
             inputPlaca = JOptionPane.showInputDialog(null, "Ingrese la placa: ");
+            if (inputPlaca == null) { // Verificar si el usuario canceló
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return -1; // Cancelar operación y retornar -1
+            }
             if(!esPlaca(inputPlaca)){
                        JOptionPane.showMessageDialog(null,"Placa tiene que ser un numero de 6 digitos(i.e.:123123)");
                    }else{
@@ -189,25 +210,37 @@ public class GestionQuickPass{
         String filial = "";
         
         while(!esValido){
-            opcion = JOptionPane.showInputDialog(null, "ELIMINAR \n 1. Por codigo \n 2. Por placa \n Ingrese el número de la opción a escoger: ");
+            opcion = JOptionPane.showInputDialog(null, "ELIMINAR \n 1. Por codigo \n 2. Por filial \n Ingrese el número de la opción a escoger: ");
+            
+            if (opcion == null) {
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return; // Salir si se cancela
+            }
             
             switch(opcion){
                 case "1":
                     while(!esValido){
                         codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                        if (codigo == null) {
+                            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                            return; // Salir si se cancela
+                        }
                         if(!esCodigo(codigo)){
                             JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                         }else{
                             int codigoInt = Integer.parseInt(codigo);
                             eliminarQuickPassporCodigo(codigoInt);
                             esValido = true;
-                            JOptionPane.showMessageDialog(null,"Codigo eliminado");
                         }
                     }
                     break;
                 case "2":
                     while(!esValido){
                         filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                        if (filial == null) {
+                            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                            return; // Salir si se cancela
+                        }
                         if(!esFilial(filial)){
                             JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                         }else{
@@ -225,24 +258,38 @@ public class GestionQuickPass{
     }
     
     private void eliminarQuickPassporCodigo(int codigo){
+        boolean encontrado = false;
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i]!=null){
                 if(arregloQuickPass[i].codigo == codigo){
                     agregarArregloEliminado(arregloQuickPass[i]);
                     arregloQuickPass[i] = null;
+                    encontrado = true;
+                    break;
                 }
             }
+        }
+        if(encontrado){
+            JOptionPane.showMessageDialog(null, "Código eliminado");
+        } else {
+            // Si no se encontró el código, mostramos un mensaje de error
+            JOptionPane.showMessageDialog(null, "Código no encontrado");
         }
     }
     
     private void eliminarQuickPassporFilial(String filial){
+        boolean encontrado = false;
         for(int i = 0; i < arregloQuickPass.length; i++){
             if(arregloQuickPass[i]!=null){
                 if(arregloQuickPass[i].getFilial().equals(filial)){
                     agregarArregloEliminado(arregloQuickPass[i]);
                     arregloQuickPass[i] = null;
+                    encontrado = true;
                 }
             }
+        }
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(null, "No se encontró QuickPass con esa filial.");
         }
     }
     
@@ -259,10 +306,18 @@ public class GestionQuickPass{
         while(!esValido){
             opcion = JOptionPane.showInputDialog(null, "VISUALIZAR \n 1. QuickPass Agregados \n 2. QuickPass Eliminados \n Ingrese el número de la opción a escoger: ");
             
+            if (opcion == null) { // Verificar si el usuario canceló
+                JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                return; // Salir de la operación
+            }
             switch(opcion){
                 case "1":
                     while(!esValido){
                         opcion2 = JOptionPane.showInputDialog(null, menu);
+                        if (opcion2 == null) { // Verificar si el usuario canceló
+                            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                            return; // Salir de la operación
+                        }
                         switch(opcion2){
                             case "1":
                                 visualizarTodos(arregloQuickPass);
@@ -271,6 +326,10 @@ public class GestionQuickPass{
                             case "2":
                                 while(!esValido){
                                     codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                                    if (codigo == null) { // Verificar si el usuario canceló
+                                        JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                                        return; // Salir de la operación
+                                    }
                                     if(!esCodigo(codigo)){
                                         JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                                     }else{
@@ -283,6 +342,10 @@ public class GestionQuickPass{
                             case "3":
                                 while(!esValido){
                                     filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                                    if (filial == null) { // Verificar si el usuario canceló
+                                        JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                                        return; // Salir de la operación
+                                    }
                                     if(!esFilial(filial)){
                                         JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                                     }else{
@@ -300,6 +363,10 @@ public class GestionQuickPass{
                 case "2":
                    while(!esValido){
                         opcion2 = JOptionPane.showInputDialog(null, menu);
+                        if (opcion2 == null) { // Verificar si el usuario canceló
+                            JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                            return; // Salir de la operación
+                        }
                         switch(opcion2){
                             case "1":
                                 visualizarTodos(quickPassEliminados);
@@ -308,6 +375,10 @@ public class GestionQuickPass{
                             case "2":
                                 while(!esValido){
                                     codigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
+                                    if (codigo == null) { // Verificar si el usuario canceló
+                                        JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                                        return; // Salir de la operación
+                                    }
                                     if(!esCodigo(codigo)){
                                         JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
                                     }else{
@@ -320,6 +391,10 @@ public class GestionQuickPass{
                             case "3":
                                 while(!esValido){
                                     filial = JOptionPane.showInputDialog(null, "Ingrese la filial: ");
+                                    if (filial == null) { // Verificar si el usuario canceló
+                                        JOptionPane.showMessageDialog(null, "Operación cancelada.");
+                                        return; // Salir de la operación
+                                    }
                                     if(!esFilial(filial)){
                                         JOptionPane.showMessageDialog(null,"Filial tiene que ser un alfanumero de 3 letras (i.e.:A12)");
                                     }else{
@@ -393,6 +468,9 @@ public class GestionQuickPass{
         while(!esValido){
             inputCodigo = JOptionPane.showInputDialog(null, "Ingrese el codigo: ");
             
+            if (inputCodigo == null) {
+                return null; // Retorna null si se cancela la operación
+            }
             if(!esCodigo(inputCodigo)){
                 JOptionPane.showMessageDialog(null,"Codigo tiene que ser un numero de 10 digitos y empezar con 101 (i.e.:1011234567)");
             }else{
